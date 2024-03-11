@@ -11,4 +11,25 @@ public interface ScheduleMapper {
      * @return
      */
     List<Schedule> queryList();
+
+    /**
+     * 根据ID删除日程
+     * @param id
+     * @return
+     */
+    int deleteById(Integer id);
+
+    /**
+     * 增加一条数据
+     * @param schedule
+     * @return
+     */
+    int insert(Schedule schedule);
+
+    /**
+     * 更新
+     * @param schedule
+     * @return
+     */
+    int update(Schedule schedule);
 }

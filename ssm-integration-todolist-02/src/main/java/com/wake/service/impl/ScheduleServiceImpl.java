@@ -25,14 +25,48 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public R page(int pageSize, int currentPage) {
-        PageHelper.startPage(currentPage,pageSize);
+        PageHelper.startPage(currentPage, pageSize);
 
-        List<Schedule> scheduleList =  scheduleMapper.queryList();
+        List<Schedule> scheduleList = scheduleMapper.queryList();
 
         PageInfo<Schedule> info = new PageInfo<>(scheduleList);
 
-        PageBean<Schedule> data = new PageBean<>(currentPage,pageSize,info.getTotal(),info.getList());
+        PageBean<Schedule> data = new PageBean<>(currentPage, pageSize, info.getTotal(), info.getList());
 
         return R.ok(data);
+    }
+
+    @Override
+    public R remove(Integer id) {
+        int row = scheduleMapper.deleteById(id);
+
+        if (row > 0) {
+            return R.ok(null);
+        } else {
+            return R.fail(null);
+        }
+    }
+
+    @Override
+    public R add(Schedule schedule) {
+
+        int row = scheduleMapper.insert(schedule);
+
+        return row > 0 ? R.ok(null) : R.fail(null);
+    }
+
+    @Override
+    public R update(Schedule schedule) {
+        //判断ID为空
+        if (schedule.getId() == null){
+            return R.fail("ID不能为空！");
+        }
+
+        int row = scheduleMapper.update(schedule);
+
+        if (row > 0) {
+            return R.ok(null);
+        }
+        return R.fail(null);
     }
 }
