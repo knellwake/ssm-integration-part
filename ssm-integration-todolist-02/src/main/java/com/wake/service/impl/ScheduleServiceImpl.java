@@ -25,12 +25,10 @@ public class ScheduleServiceImpl implements ScheduleService {
 
     @Override
     public R page(int pageSize, int currentPage) {
-        //分页
         PageHelper.startPage(currentPage,pageSize);
 
-        List<Schedule> scheduleList = scheduleMapper.queryList();
+        List<Schedule> scheduleList =  scheduleMapper.queryList();
 
-        //分页数据配置
         PageInfo<Schedule> info = new PageInfo<>(scheduleList);
 
         PageBean<Schedule> data = new PageBean<>(currentPage,pageSize,info.getTotal(),info.getList());

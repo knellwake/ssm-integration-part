@@ -20,19 +20,14 @@ import java.util.List;
 @RequestMapping("schedule")
 @Slf4j
 public class ScheduleController {
-
     @Autowired
     private ScheduleService scheduleService;
-
     @GetMapping("/{pageSize}/{currentPage}")
     public R page(@PathVariable int pageSize,
-                  @PathVariable int currentPage){
+                  @PathVariable int currentPage) {
 
         R r = scheduleService.page(pageSize,currentPage);
-
-        log.info("查询的数据为 ： {}",r);
-
+        log.info("查询信息为：{}",r);
         return r;
-
     }
 }
